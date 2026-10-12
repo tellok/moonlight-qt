@@ -1,4 +1,3 @@
----
 name: Build
 permissions:
   contents: read
@@ -7,7 +6,7 @@ on:
   push:
   pull_request:
     branches:
-      - master
+    - master
 
 concurrency:
   group: build-${{ github.ref }}
@@ -15,16 +14,20 @@ concurrency:
 
 jobs:
   setup:
-    runs-on: ubuntu-latest
+    runs-on:
+    - self-hosted
+    - tower
+    - ubuntu-latest
+    - tower-run-${{ github.run_id }}-${{ github.run_attempt }}
     outputs:
       ci_version: ${{ steps.set-ci-version.outputs.ci_version }}
     steps:
-      - name: Set CI version
-        id: set-ci-version
-        shell: bash
-        run: |
-          CI_VERSION=`echo ${GITHUB_SHA} | cut -c1-6`
-          echo "ci_version=${CI_VERSION}" >> "${GITHUB_OUTPUT}"
+    - name: Set CI version
+      id: set-ci-version
+      shell: bash
+      run: |
+        CI_VERSION=`echo ${GITHUB_SHA} | cut -c1-6`
+        echo "ci_version=${CI_VERSION}" >> "${GITHUB_OUTPUT}"
 
   build-appimage:
     needs: setup
