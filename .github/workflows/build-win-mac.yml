@@ -24,12 +24,7 @@ jobs:
         - os: macos-15
           qt_version: 6.11.0
 
-    runs-on:
-
-    - self-hosted
-    - tower
-    - ${{ matrix.os }}
-    - tower-run-${{ github.run_id }}-${{ github.run_attempt }}
+    runs-on: ["self-hosted", "${{ matrix.os }}"]
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v5

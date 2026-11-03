@@ -13,12 +13,7 @@ jobs:
   build:
     env:
       CI_VERSION: ${{ inputs.ci_version }}
-    runs-on:
-
-    - self-hosted
-    - tower
-    - ubuntu-22.04
-    - tower-run-${{ github.run_id }}-${{ github.run_attempt }}
+    runs-on: ["self-hosted", "ubuntu-22.04"]
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v5

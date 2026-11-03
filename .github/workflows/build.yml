@@ -14,11 +14,7 @@ concurrency:
 
 jobs:
   setup:
-    runs-on:
-    - self-hosted
-    - tower
-    - ubuntu-latest
-    - tower-run-${{ github.run_id }}-${{ github.run_attempt }}
+    runs-on: ["self-hosted", "ubuntu-latest"]
     outputs:
       ci_version: ${{ steps.set-ci-version.outputs.ci_version }}
     steps:
