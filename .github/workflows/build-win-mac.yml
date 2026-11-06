@@ -24,7 +24,7 @@ jobs:
         - os: macos-15
           qt_version: 6.11.0
 
-    runs-on: ["self-hosted", "${{ matrix.os }}"]
+    runs-on: "${{ matrix.os }}"
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v5
